@@ -6,144 +6,139 @@ Use BookStoreManagementDB;
 
 go
 
--- Create User Table
+-- Create the User table
 CREATE TABLE [User] (
-    UserId INT PRIMARY KEY,
-    FullName VARCHAR(100),
-    Password VARCHAR(100),
-    Email VARCHAR(100),
-    Role VARCHAR(50),
-    Status VARCHAR(50)
+    UserId INT IDENTITY PRIMARY KEY,
+    FullName VARCHAR(255) NOT NULL,
+    Password VARCHAR(255) NOT NULL,
+    Email VARCHAR(255) NOT NULL,
+    Role VARCHAR(50) NOT NULL,
+    Status VARCHAR(50) NOT NULL
 );
-GO
--- Create Books Table
+go
+-- Create the Publishers table
+CREATE TABLE Publishers (
+    PublisherId INT IDENTITY PRIMARY KEY,
+    PublisherName VARCHAR(255) NOT NULL,
+    PublisherEmail VARCHAR(255),
+    PublisherDescription TEXT,
+    PublisherPhoneNo VARCHAR(20)
+);
+go
+-- Create the Authors table
+CREATE TABLE Authors (
+    AuthorId INT IDENTITY PRIMARY KEY,
+    AuthorName VARCHAR(255) NOT NULL,
+    AuthorDescription TEXT,
+    AuthorAge INT
+);
+go
+-- Create the Categories table
+CREATE TABLE Categories (
+    CategoryId INT IDENTITY PRIMARY KEY,
+    CategoryName VARCHAR(255) NOT NULL,
+    CategoryDescription TEXT
+);
+Go
+-- Create the Books table
 CREATE TABLE Books (
-    BookId INT PRIMARY KEY,
-    BookName VARCHAR(100),
+    BookId INT IDENTITY PRIMARY KEY,
+    BookName VARCHAR(255) NOT NULL,
     AuthorId INT,
     PublisherId INT,
     CategoryId INT,
     Quantity INT,
-    Price DECIMAL(10, 2)
+    Price DECIMAL(10, 2),
+    FOREIGN KEY (AuthorId) REFERENCES Authors(AuthorId),
+    FOREIGN KEY (PublisherId) REFERENCES Publishers(PublisherId),
+    FOREIGN KEY (CategoryId) REFERENCES Categories(CategoryId)
 );
-GO
--- Create Publishers Table
-CREATE TABLE Publishers (
-    PublisherId INT PRIMARY KEY,
-    PublisherName VARCHAR(100),
-    PublisherEmail VARCHAR(100),
-    PublisherDescription TEXT,
-    PublisherPhoneNo VARCHAR(20)
-);
-GO
--- Create Authors Table
-CREATE TABLE Authors (
-    AuthorId INT PRIMARY KEY,
-    AuthorName VARCHAR(100),
-    AuthorDescription TEXT,
-    AuthorAge INT
-);
-GO
--- Create Categories Table
-CREATE TABLE Categories (
-    CategoryId INT PRIMARY KEY,
-    CategoryName VARCHAR(100),
-    CategoryDescription TEXT
-);
+
 GO
 -- Sample Data for User Table
 INSERT INTO [User] (UserId, FullName, Password, Email, Role, Status) VALUES
-(1, 'Admin User', 'adminpass', 'admin@bookstore.com', 'Admin', 'Active'),
-(2, 'Staff One', 'staff1pass', 'staff1@bookstore.com', 'Staff', 'Active'),
-(3, 'Staff Two', 'staff2pass', 'staff2@bookstore.com', 'Staff', 'Active'),
-(4, 'Staff Three', 'staff3pass', 'staff3@bookstore.com', 'Staff', 'Active');
-GO
--- Sample Data for Publishers Table
-INSERT INTO Publishers (PublisherId, PublisherName, PublisherEmail, PublisherDescription, PublisherPhoneNo) VALUES
-(1, 'Publisher One', 'contact@publisher1.com', 'Description of Publisher One', '1234567890'),
-(2, 'Publisher Two', 'contact@publisher2.com', 'Description of Publisher Two', '1234567891'),
-(3, 'Publisher Three', 'contact@publisher3.com', 'Description of Publisher Three', '1234567892'),
-(4, 'Publisher Four', 'contact@publisher4.com', 'Description of Publisher Four', '1234567893'),
-(5, 'Publisher Five', 'contact@publisher5.com', 'Description of Publisher Five', '1234567894'),
-(6, 'Publisher Six', 'contact@publisher6.com', 'Description of Publisher Six', '1234567895'),
-(7, 'Publisher Seven', 'contact@publisher7.com', 'Description of Publisher Seven', '1234567896'),
-(8, 'Publisher Eight', 'contact@publisher8.com', 'Description of Publisher Eight', '1234567897'),
-(9, 'Publisher Nine', 'contact@publisher9.com', 'Description of Publisher Nine', '1234567898'),
-(10, 'Publisher Ten', 'contact@publisher10.com', 'Description of Publisher Ten', '1234567899');
-GO
--- Sample Data for Authors Table
-INSERT INTO Authors (AuthorId, AuthorName, AuthorDescription, AuthorAge) VALUES
-(1, 'Author One', 'Description of Author One', 45),
-(2, 'Author Two', 'Description of Author Two', 50),
-(3, 'Author Three', 'Description of Author Three', 60),
-(4, 'Author Four', 'Description of Author Four', 55),
-(5, 'Author Five', 'Description of Author Five', 35),
-(6, 'Author Six', 'Description of Author Six', 40),
-(7, 'Author Seven', 'Description of Author Seven', 30),
-(8, 'Author Eight', 'Description of Author Eight', 65),
-(9, 'Author Nine', 'Description of Author Nine', 70),
-(10, 'Author Ten', 'Description of Author Ten', 75),
-(11, 'Author Eleven', 'Description of Author Eleven', 80),
-(12, 'Author Twelve', 'Description of Author Twelve', 85),
-(13, 'Author Thirteen', 'Description of Author Thirteen', 90),
-(14, 'Author Fourteen', 'Description of Author Fourteen', 95),
-(15, 'Author Fifteen', 'Description of Author Fifteen', 32),
-(16, 'Author Sixteen', 'Description of Author Sixteen', 34),
-(17, 'Author Seventeen', 'Description of Author Seventeen', 36),
-(18, 'Author Eighteen', 'Description of Author Eighteen', 38),
-(19, 'Author Nineteen', 'Description of Author Nineteen', 42),
-(20, 'Author Twenty', 'Description of Author Twenty', 44);
-GO
--- Sample Data for Categories Table
-INSERT INTO [Categories] (CategoryId, CategoryName, CategoryDescription) VALUES
-(1, 'Fiction', 'Description of Fiction Category'),
-(2, 'Non-Fiction', 'Description of Non-Fiction Category'),
-(3, 'Science', 'Description of Science Category'),
-(4, 'History', 'Description of History Category'),
-(5, 'Technology', 'Description of Technology Category'),
-(6, 'Biography', 'Description of Biography Category'),
-(7, 'Fantasy', 'Description of Fantasy Category');
-GO
--- Sample Data for Books Table
-INSERT INTO Books (BookId, BookName, AuthorId, PublisherId, CategoryId, Quantity, Price) VALUES
-(1, 'Book One', 1, 1, 1, 100, 9.99),
-(2, 'Book Two', 2, 2, 2, 200, 19.99),
-(3, 'Book Three', 3, 3, 3, 300, 29.99),
-(4, 'Book Four', 4, 4, 4, 400, 39.99),
-(5, 'Book Five', 5, 5, 5, 500, 49.99),
-(6, 'Book Six', 6, 6, 6, 600, 59.99),
-(7, 'Book Seven', 7, 7, 7, 700, 69.99),
-(8, 'Book Eight', 8, 8, 1, 800, 79.99),
-(9, 'Book Nine', 9, 9, 2, 900, 89.99),
-(10, 'Book Ten', 10, 10, 3, 1000, 99.99),
-(11, 'Book Eleven', 11, 1, 4, 1100, 109.99),
-(12, 'Book Twelve', 12, 2, 5, 1200, 119.99),
-(13, 'Book Thirteen', 13, 3, 6, 1300, 129.99),
-(14, 'Book Fourteen', 14, 4, 7, 1400, 139.99),
-(15, 'Book Fifteen', 15, 5, 8, 1500, 149.99),
-(16, 'Book Sixteen', 16, 6, 9, 1600, 159.99),
-(17, 'Book Seventeen', 17, 7, 10, 1700, 169.99),
-(18, 'Book Eighteen', 18, 8, 1, 1800, 179.99),
-(19, 'Book Nineteen', 19, 9, 2, 1900, 189.99),
-(20, 'Book Twenty', 20, 10, 3, 2000, 199.99),
-(21, 'Book Twenty-One', 1, 1, 4, 2100, 209.99),
-(22, 'Book Twenty-Two', 2, 2, 5, 2200, 219.99),
-(23, 'Book Twenty-Three', 3, 3, 6, 2300, 229.99),
-(24, 'Book Twenty-Four', 4, 4, 7, 2400, 239.99),
-(25, 'Book Twenty-Five', 5, 5, 8, 2500, 249.99),
-(26, 'Book Twenty-Six', 6, 6, 9, 2600, 259.99),
-(27, 'Book Twenty-Seven', 7, 7, 10, 2700, 269.99),
-(28, 'Book Twenty-Eight', 8, 8, 1, 2800, 279.99),
-(29, 'Book Twenty-Nine', 9, 9, 2, 2900, 289.99),
-(30, 'Book Thirty', 10, 10, 3, 3000, 299.99);
+(1, 'Admin', '1', 'admin@bookstore.com', 'Admin', 'Active'),
+(2, 'Linh Co Don', '2', 'lonelystonie@bookstore.com', 'Staff', 'Active'),
+(3, 'Hoang Sa Co', '3', 'staff2@bookstore.com', 'Staff', 'Active'),
+(4, 'Le Hong Gam', '4', 'staff3@bookstore.com', 'Staff', 'Disabled');
 
+GO
+-- Insert sample publishers
+INSERT INTO Publishers (PublisherName, PublisherEmail, PublisherDescription, PublisherPhoneNo) VALUES
+('Kim Dong', 'contact@nxbkimdong.com', 'Fostering a love of reading in children of all ages.', '1234567890'),
+('Hoang Sa', 'contact@nxbhoangsa.com', 'Unearthing historical gems for a new generation.', '1234567891'),
+('Nha Co Ay', 'contact@nxhnhacoay.com', 'Award-winning publisher of thought-provoking fiction.', '1234567892'),
+('Ban Mai', 'contact@nxbbanmai.com', 'Where tomorrow''s literary stars are born.', '1234567893'),
+('Phuong Nam', 'contact@phuongnamog.com', 'Celebrating Vietnamese voices since 1999', '1234567894'),
+('Hien Huu', 'contact@bienmat.com', 'Pioneering innovative formats for the modern reader.', '1234567895'),
+('Minh Anh Co-op', 'contact@minhanhcoop.com', 'Building strong minds with engaging educational resources.', '1234567896'),
+('Min Xu Hao', 'contact@minxuxu.com', 'Building strong minds with engaging educational resources.', '1234567897'),
+('Linh Mien Tay', 'contact@khongphaimiendong.com', 'Building strong minds with engaging educational resources.', '1234567898'),
+('Mot Dieu Uoc', 'contact@muoidieuuoc.com', 'Turning literary aspirations into reality.', '1234567899');
+go
+-- Insert sample authors
+INSERT INTO Authors (AuthorName, AuthorDescription, AuthorAge) VALUES
+('Ho Hoan Kiem', 'Weaving tales of fantasy', 45),
+('Nina', 'Stirring emotions with her coming-of-age stories', 50),
+('Hoang Tau Hu', 'A veteran author crafting historical fiction', 35),
+('Nguoi Tinh Mua Quat', 'Award-winning author with over 60 published works', 60),
+('Nguyen Han Anh', 'Delving into the complexities of human nature', 40),
+('Pinky', 'A captivating voice with a knack for witty dialogue', 21),
+('Kusanali Nahida', 'A fresh new voice debuts with a sci-fi thriller', 500),
+('Newdaynewmay', 'Pushing the limits of horror', 65),
+('Kisuqua', 'Evoking emotions with her lyrical prose', 38),
+('Motnamqua', 'A promising new author emerges with a captivating debut', 48);
+go
+-- Insert sample categories
+INSERT INTO Categories (CategoryName, CategoryDescription) VALUES
+('Fantasy', 'Worlds of magic and wonder, where dragons soar and heroes rise.'),
+('Mystery & Thriller', 'Unraveling puzzles, following clues, where suspense keeps you on the edge of your seat.'),
+('Science Fiction', 'Journeys to distant galaxies, exploring the future of technology and humanity.'),
+('Historical Fiction', 'Stepping back in time, experiencing the lives and struggles of those who came before.'),
+('Contemporary Fiction', 'Stories that reflect the world around us, exploring modern relationships and social issues.');
+go
+-- Insert sample books
+INSERT INTO Books (BookName, AuthorId, PublisherId, CategoryId, Quantity, Price) VALUES
+('The Dragon''s Call', 1, 1, 1, 10, 19.99),
+('Secrets of the Forbidden City', 2, 2, 2, 5, 29.99),
+('The Alchemist''s Apprentice', 3, 3, 3, 8, 25.99),
+('The Midnight Detective', 4, 4, 4, 12, 15.99),
+('Love in the Time of War', 5, 5, 5, 6, 20.99),
+('Echoes of a Forgotten Empire', 6, 6, 1, 9, 17.99),
+('The Haunting of Blackwood Manor', 7, 7, 2, 11, 22.99),
+('Beyond the Event Horizon', 8, 8, 3, 14, 18.99),
+('The Song of the Last Phoenix', 9, 9, 4, 7, 24.99),
+('Whispers of a New Dawn', 10, 10, 5, 13, 21.99),
+('A Conspiracy of Shadows', 1, 2, 3, 15, 27.99),
+('The Scarlet Pimpernel Returns', 2, 3, 4, 16, 16.99),
+('Murder on the Orient Express (Vietnamese Edition)', 3, 4, 5, 17, 23.99),
+('The Lost City of Z: A Vietnamese Adventure', 4, 5, 1, 18, 19.99),
+('The Book Thief (Vietnamese Translation)', 5, 6, 2, 19, 25.99),
+('Romeo and Juliet in Modern Saigon', 6, 7, 3, 20, 29.99),
+('The Martian Chronicles: A Vietnamese Perspective', 7, 8, 4, 21, 30.99),
+('AI Uprising: Can Humanity Survive?', 8, 9, 5, 22, 22.99),
+('The Girl with the Pearl Earring (Vietnamese Edition)', 9, 10, 1, 23, 28.99),
+('One Hundred Years of Solitude (Vietnamese Translation)', 10, 1, 2, 24, 26.99),
+('The Call of the Wild (Vietnamese Adaptation)', 1, 2, 3, 25, 31.99),
+('Pride and Prejudice: A Modern Retelling', 2, 3, 4, 26, 20.99),
+('The Count of Monte Cristo (Vietnamese Edition)', 3, 4, 5, 27, 24.99),
+('The Adventures of Sherlock Holmes (Vietnamese Collection)', 4, 5, 1, 28, 21.99),
+('Jane Eyre (Vietnamese Translation)', 5, 6, 2, 29, 23.99),
+('The Great Gatsby: A Vietnamese Interpretation', 6, 7, 3, 30, 27.99),
+('To Kill a Mockingbird (Vietnamese Edition)', 7, 8, 4, 31, 19.99),
+('Animal Farm (Vietnamese Translation)', 8, 9, 5, 32, 18.99),
+('The Catcher in the Rye (Vietnamese Edition)', 9, 10, 1, 33, 20.99),
+('Hamlet (Vietnamese Adaptation)', 10, 1, 2, 34, 29.99);
 
+go
 select * from [User]
-
+go
 select * from [Categories]
-
+go
 select * from Books
-
+go
 select * from Publishers
-
+go
 Select * from Authors
+
+--drop database BookStoreManagementDB
