@@ -71,7 +71,7 @@
             dgv_books.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgv_books.Size = new Size(897, 334);
             dgv_books.TabIndex = 0;
-            dgv_books.CellDoubleClick += new DataGridViewCellEventHandler(List_doubleClick);
+            dgv_books.CellDoubleClick += List_doubleClick;
             // 
             // book_count_label
             // 
@@ -114,6 +114,7 @@
             delete_book.TabIndex = 4;
             delete_book.Text = "Delete Book";
             delete_book.UseVisualStyleBackColor = false;
+            delete_book.Click += delete_book_Click;
             // 
             // update_book
             // 
@@ -193,6 +194,7 @@
             Controls.Add(dgv_books);
             Name = "BookList";
             Text = "BookList";
+            FormClosed += refresh_dgv;
             KeyDown += enter;
             ((System.ComponentModel.ISupportInitialize)dgv_books).EndInit();
             ((System.ComponentModel.ISupportInitialize)bookBindingSource).EndInit();

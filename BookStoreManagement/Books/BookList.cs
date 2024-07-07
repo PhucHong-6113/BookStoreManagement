@@ -36,27 +36,29 @@ namespace PresentationObject.Books
         private void refreshData()
         {
             dgv_books.DataSource = null;
-            dgv_books.DataSource = _bookRepository.GetBooks
-                (b => b.BookName.Contains(search_txt.Text) || b.Author.AuthorName.Contains(search_txt.Text) || b.Category.CategoryName.Contains(search_txt.Text) || b.Publisher.PublisherName.Contains(search_txt.Text))
-                .Select(b => new
+            List<BookViewModel> books = _bookRepository.GetBooks
+                (b => b.BookName.Contains(search_txt.Text) ||
+                      b.Author.AuthorName.Contains(search_txt.Text) ||
+                      b.Category.CategoryName.Contains(search_txt.Text) ||
+                      b.Publisher.PublisherName.Contains(search_txt.Text))
+                .Select(b => new BookViewModel
                 {
-                    b.BookId,
-                    b.BookName,
+                    BookId = b.BookId,
+                    BookName = b.BookName,
                     Category = b.Category.CategoryName,
                     Author = b.Author.AuthorName,
                     Publisher = b.Publisher.PublisherName,
-                    b.Quantity,
-                    b.Price,
+                    Quantity = b.Quantity,
+                    Price = b.Price,
                 }).ToList();
+            dgv_books.DataSource = books;
             if (search_txt.Text == "")
             {
                 book_count_label.Text = (_bookRepository.CountBooks() + " books existed!!");
             }
             else
             {
-                var dataSource = dgv_books.DataSource as IList<object>;
-                int count = dataSource?.Count ?? 0;
-                book_count_label.Text = (count + " book(s) match your search!!");
+                book_count_label.Text = (books.Count() + " book(s) match your search!!");
             }
 
         }
@@ -76,6 +78,11 @@ namespace PresentationObject.Books
         {
             AddBook addBook = new AddBook();
             addBook.Show();
+            addBook.Closed += delegate
+            {
+                _bookRepository = new();
+                refreshData();
+            };
         }
 
         private void search_btn_Click(object sender, EventArgs e)
@@ -90,12 +97,11 @@ namespace PresentationObject.Books
             //this.Close();
         }
 
-        private void enter(object sender, KeyEventArgs e)
+        private void enter(object sender, KeyEventArgs e)             //No can't do :((
         {
             if (e.KeyCode == Keys.Enter)
             {
                 refreshData();
-
             }
         }
 
@@ -113,6 +119,39 @@ namespace PresentationObject.Books
                 bookDetail.Show();
                 this.Hide();
             }
+        }
+
+        private void refresh_dgv(object sender, FormClosedEventArgs e)             //no can't do :((
+        {
+            refreshData();
+        }
+
+        private void delete_book_Click(object sender, EventArgs e)
+        {
+            if (dgv_books.SelectedRows.Count > 0)
+            {
+                int selectedBookId = Convert.ToInt32(dgv_books.CurrentRow.Cells["BookId"].Value);
+
+                DialogResult result = MessageBox.Show("Are you sure you want to delete " + _bookRepository.GetBook(selectedBookId).BookName + "?"
+                    , "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+                    _bookRepository.DeleteBook(selectedBookId);
+                    refreshData();
+                }
+            }
+        }
+
+        public class BookViewModel
+        {
+            public int BookId { get; set; }
+            public string BookName { get; set; }
+            public string Category { get; set; } // Assuming CategoryName is a string
+            public string Author { get; set; }   // Assuming AuthorName is a string
+            public string Publisher { get; set; } // Assuming PublisherName is a string
+            public int? Quantity { get; set; }
+            public decimal? Price { get; set; }
         }
     }
 }

@@ -155,27 +155,29 @@
             // 
             // publisher_cbb
             // 
+            publisher_cbb.DisplayMember = "Text";
             publisher_cbb.Font = new Font("Microsoft Sans Serif", 15.75F);
             publisher_cbb.FormattingEnabled = true;
             publisher_cbb.Location = new Point(141, 492);
             publisher_cbb.Name = "publisher_cbb";
             publisher_cbb.Size = new Size(329, 33);
             publisher_cbb.TabIndex = 38;
-            publisher_cbb.Visible = false;
+            publisher_cbb.ValueMember = "value";
             // 
             // author_cbb
             // 
+            author_cbb.DisplayMember = "Text";
             author_cbb.Font = new Font("Microsoft Sans Serif", 15.75F);
             author_cbb.FormattingEnabled = true;
             author_cbb.Location = new Point(141, 414);
             author_cbb.Name = "author_cbb";
             author_cbb.Size = new Size(329, 33);
             author_cbb.TabIndex = 39;
-            author_cbb.Visible = false;
+            author_cbb.ValueMember = "Value";
             // 
             // category_cbb
             // 
-            category_cbb.DropDownStyle = ComboBoxStyle.Simple;
+            category_cbb.DisplayMember = "Text";
             category_cbb.DropDownWidth = 328;
             category_cbb.Font = new Font("Microsoft Sans Serif", 15.75F);
             category_cbb.FormattingEnabled = true;
@@ -183,7 +185,7 @@
             category_cbb.Name = "category_cbb";
             category_cbb.Size = new Size(329, 33);
             category_cbb.TabIndex = 40;
-            category_cbb.Visible = false;
+            category_cbb.ValueMember = "Value";
             // 
             // menu_link
             // 
