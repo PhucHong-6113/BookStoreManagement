@@ -43,7 +43,7 @@ namespace BookStoreManagement
             }
             else
             {
-                MessageBox.Show("Incorrect userId or password");
+                MessageBox.Show("Incorrect UserId or Password");
             }
 
         }
