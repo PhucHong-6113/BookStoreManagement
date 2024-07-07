@@ -39,7 +39,11 @@ namespace DataAccessObject
 
         public Book GetBook(int id)
         {
-            return _context.Books.Find(id);
+            return _context.Books
+            .Include(b => b.Category)
+            .Include(b => b.Author)
+            .Include(b => b.Publisher)
+            .FirstOrDefault(b => b.BookId == id);
         }
 
         public void AddBook(Book book)
@@ -62,6 +66,16 @@ namespace DataAccessObject
                 _context.Books.Remove(book);
                 _context.SaveChanges();
             }
+        }
+
+        public int CountBooks()
+        {
+            if (_context.Books == null)
+            {
+                return 0;
+            }
+            else { return _context.Books.Count(); }
+            
         }
     }
 }

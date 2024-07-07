@@ -18,5 +18,6 @@ namespace DataAccessObject
         public void AddBook(Book book);
         public void UpdateBook(Book book);
         public void DeleteBook(int id);
+        public int CountBooks();
     }
 }

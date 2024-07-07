@@ -32,7 +32,7 @@
             dgv_books = new DataGridView();
             book_count_label = new Label();
             add_book = new Button();
-            button2 = new Button();
+            book_detail = new Button();
             delete_book = new Button();
             update_book = new Button();
             search_txt = new TextBox();
@@ -48,8 +48,11 @@
             dgv_books.AllowUserToDeleteRows = false;
             dgv_books.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgv_books.Location = new Point(30, 118);
+            dgv_books.MultiSelect = false;
             dgv_books.Name = "dgv_books";
             dgv_books.ReadOnly = true;
+            dgv_books.RowHeadersVisible = false;
+            dgv_books.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgv_books.Size = new Size(831, 334);
             dgv_books.TabIndex = 0;
             // 
@@ -72,15 +75,16 @@
             add_book.Text = "Add Book";
             add_book.UseVisualStyleBackColor = false;
             // 
-            // button2
+            // book_detail
             // 
-            button2.BackColor = SystemColors.Info;
-            button2.Location = new Point(894, 118);
-            button2.Name = "button2";
-            button2.Size = new Size(113, 44);
-            button2.TabIndex = 3;
-            button2.Text = "View Book Detail";
-            button2.UseVisualStyleBackColor = false;
+            book_detail.BackColor = SystemColors.Info;
+            book_detail.Location = new Point(894, 118);
+            book_detail.Name = "book_detail";
+            book_detail.Size = new Size(113, 44);
+            book_detail.TabIndex = 3;
+            book_detail.Text = "View Book Detail";
+            book_detail.UseVisualStyleBackColor = false;
+            book_detail.Click += book_detail_Click;
             // 
             // delete_book
             // 
@@ -154,7 +158,7 @@
             Controls.Add(search_txt);
             Controls.Add(update_book);
             Controls.Add(delete_book);
-            Controls.Add(button2);
+            Controls.Add(book_detail);
             Controls.Add(add_book);
             Controls.Add(book_count_label);
             Controls.Add(dgv_books);
@@ -170,7 +174,7 @@
         private DataGridView dgv_books;
         private Label book_count_label;
         private Button add_book;
-        private Button button2;
+        private Button book_detail;
         private Button delete_book;
         private Button update_book;
         private TextBox search_txt;

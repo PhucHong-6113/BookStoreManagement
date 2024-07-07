@@ -35,7 +35,6 @@ namespace PresentationObject.Books
         }
         private void refreshData()
         {
-
             dgv_books.DataSource = null;
             dgv_books.DataSource = _bookRepository.GetBooks
                 (b => b.BookName.Contains(search_txt.Text))
@@ -49,6 +48,18 @@ namespace PresentationObject.Books
                     b.Quantity,
                     b.Price,
                 }).ToList();
+            book_count_label.Text = (_bookRepository.CountBooks() + " books existed!!");
+        }
+
+        private void book_detail_Click(object sender, EventArgs e)
+        {
+            if (dgv_books.SelectedRows.Count > 0)
+            {
+                int selectedBookId = Convert.ToInt32(dgv_books.CurrentRow.Cells["BookId"].Value);
+                BookDetail bookDetail = new BookDetail(selectedBookId, this);
+                bookDetail.Show();
+                this.Hide();
+            }
         }
     }
 }
