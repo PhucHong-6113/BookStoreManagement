@@ -33,6 +33,7 @@ namespace PresentationObject.Books
 
 
         }
+
         private void refreshData()
         {
             dgv_books.DataSource = null;
@@ -60,6 +61,17 @@ namespace PresentationObject.Books
                 bookDetail.Show();
                 this.Hide();
             }
+        }
+
+        private void add_book_Click(object sender, EventArgs e)
+        {
+            AddBook addBook = new AddBook();
+            addBook.Show();
+        }
+
+        private void search_btn_Click(object sender, EventArgs e)
+        {
+            refreshData();
         }
     }
 }

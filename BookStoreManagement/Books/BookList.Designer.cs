@@ -74,6 +74,7 @@
             add_book.TabIndex = 2;
             add_book.Text = "Add Book";
             add_book.UseVisualStyleBackColor = false;
+            add_book.Click += add_book_Click;
             // 
             // book_detail
             // 
@@ -124,6 +125,7 @@
             search_btn.Size = new Size(47, 32);
             search_btn.TabIndex = 7;
             search_btn.UseVisualStyleBackColor = true;
+            search_btn.Click += search_btn_Click;
             // 
             // book_banner
             // 
