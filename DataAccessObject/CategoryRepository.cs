@@ -12,10 +12,60 @@ namespace DataAccessObject
     public class CategoryRepository : ICategoryRepository
     {
         BookStoreManagementDbContext _context;
-        public CategoryRepository(BookStoreManagementDbContext context)
+        public CategoryRepository()
         {
-            _context = context;
+            _context = new BookStoreManagementDbContext();
         }
+
+        public List<Category> GetCategories(Expression<Func<Category, bool>> predicate)
+        {
+            return _context.Categories
+                .Where(predicate)
+                .Select(c => new Category
+                {
+                    CategoryId = c.CategoryId,
+                    CategoryName = c.CategoryName,
+                    CategoryDescription = c.CategoryDescription
+                }).ToList();
+        }
+        public List<Category> GetCategories()
+        {
+            return _context.Categories
+                
+                .Select(c => new Category
+                {
+                    CategoryId = c.CategoryId,
+                    CategoryName = c.CategoryName,
+                    CategoryDescription = c.CategoryDescription
+                }).ToList();
+        }
+        public Category GetCategory(int id)
+        {
+            return _context.Categories
+                .FirstOrDefault(b => b.CategoryId == id);
+        }
+        public void AddCategory(Category category)
+        {
+            _context.Categories.Add(category);
+            _context.SaveChanges();
+        }
+        public void UpdateCategory(Category category)
+        {
+            _context.Categories.Update(category);
+            _context.SaveChanges();
+        }
+        public void DeleteCategory(int id)
+        {
+            var category = _context.Categories.Find(id);
+            if (category != null)
+            {
+                _context.Categories.Remove(category);
+                _context.SaveChanges();
+            }
+        }
+        
+
+        /*
         public Category GetCategory(int id)
         {
             return _context.Categories.FirstOrDefault(a => a.CategoryId == id);
@@ -57,6 +107,6 @@ namespace DataAccessObject
                 return true;
             }
             return false;
-        }
+        }*/
     }
 }

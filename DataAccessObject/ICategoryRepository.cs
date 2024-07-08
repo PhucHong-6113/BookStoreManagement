@@ -1,4 +1,6 @@
 ﻿using BusinessObject.Models;
+using Microsoft.EntityFrameworkCore.Update.Internal;
+using Microsoft.Identity.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,13 +10,14 @@ using System.Threading.Tasks;
 
 namespace DataAccessObject
 {
-    internal interface ICategoryRepository
+    public interface ICategoryRepository
     {
         public Category GetCategory(int id);
+        public List<Category> GetCategories();
         public List<Category> GetCategories(Expression<Func<Category, bool>> predicate);
-        public bool AddCategory(Category category);
-        public bool UpdateCategory(Category category);
-        public bool DeleteCategory(int id);
+        public void AddCategory(Category category);
+        public void UpdateCategory(Category category);
+        public void DeleteCategory(int id);
 
     }
 }
