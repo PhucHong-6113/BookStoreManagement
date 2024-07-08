@@ -56,11 +56,11 @@ CREATE TABLE Books (
 
 GO
 -- Sample Data for User Table
-INSERT INTO [User] (UserId, FullName, Password, Email, Role, Status) VALUES
-(1, 'Admin', '1', 'admin@bookstore.com', 'Admin', 'Active'),
-(2, 'Linh Co Don', '2', 'lonelystonie@bookstore.com', 'Staff', 'Active'),
-(3, 'Hoang Sa Co', '3', 'staff2@bookstore.com', 'Staff', 'Active'),
-(4, 'Le Hong Gam', '4', 'staff3@bookstore.com', 'Staff', 'Disabled');
+INSERT INTO [User] (FullName, Password, Email, Role, Status) VALUES
+('Admin', '1', 'admin@bookstore.com', 'Admin', 'Active'),
+('Linh Co Don', '2', 'lonelystonie@bookstore.com', 'Staff', 'Active'),
+('Hoang Sa Co', '3', 'staff2@bookstore.com', 'Staff', 'Active'),
+('Le Hong Gam', '4', 'staff3@bookstore.com', 'Staff', 'Disabled');
 
 GO
 -- Insert sample publishers
