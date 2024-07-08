@@ -1,4 +1,5 @@
-using PresentationObject.Books;
+using PresentationObject.Publishers;
+using System.Security.Policy;
 
 namespace BookStoreManagement
 {
@@ -13,7 +14,7 @@ namespace BookStoreManagement
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new BookList());
+            Application.Run(new PublisherList());
         }
     }
 }
