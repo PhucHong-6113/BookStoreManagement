@@ -1,4 +1,5 @@
 using PresentationObject.Authors;
+using PresentationObject.Books;
 using PresentationObject.Publishers;
 using System.Security.Policy;
 namespace BookStoreManagement
@@ -15,7 +16,7 @@ namespace BookStoreManagement
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             //Application.Run(new Login());
-            Application.Run(new FrmManageAuthors());
+            Application.Run(new Login());
         }
     }
 }
