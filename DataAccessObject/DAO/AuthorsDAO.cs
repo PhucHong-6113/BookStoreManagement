@@ -37,8 +37,6 @@ namespace DataAccessObject.DAO
 
         public Author addAuthor(Author author)
         {
-                int id = db.Authors.Max(a => a.AuthorId) + 1;
-                author.AuthorId = id;
                 db.Authors.Add(author);
                 db.SaveChanges();
             return author;

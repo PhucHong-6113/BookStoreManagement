@@ -1,6 +1,6 @@
 ﻿using BookStoreManagement;
 using BusinessObject.Models;
-using BusinessObject.Repository;
+using DataAccessObject.Repository;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

@@ -365,11 +365,12 @@
             id_lbl.AutoSize = true;
             id_lbl.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             id_lbl.ForeColor = Color.Red;
-            id_lbl.Location = new Point(352, 74);
+            id_lbl.Location = new Point(44, 31);
             id_lbl.Name = "id_lbl";
             id_lbl.Size = new Size(61, 37);
             id_lbl.TabIndex = 41;
             id_lbl.Text = "null";
+            id_lbl.Visible = false;
             // 
             // publisherId_lbl
             // 

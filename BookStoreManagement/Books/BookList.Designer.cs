@@ -195,7 +195,6 @@
             Controls.Add(dgv_books);
             Name = "BookList";
             Text = "BookList";
-            FormClosed += refresh_dgv;
             KeyDown += enter;
             ((System.ComponentModel.ISupportInitialize)dgv_books).EndInit();
             ((System.ComponentModel.ISupportInitialize)bookBindingSource).EndInit();

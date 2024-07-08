@@ -50,6 +50,7 @@
             txtEmail = new TextBox();
             txtDescription = new TextBox();
             txtPhoneNumber = new TextBox();
+            button2 = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvPublisher).BeginInit();
             grbSearch.SuspendLayout();
             grbTask.SuspendLayout();
@@ -239,6 +240,7 @@
             // 
             // txtID
             // 
+            txtID.Enabled = false;
             txtID.Location = new Point(154, 22);
             txtID.Name = "txtID";
             txtID.Size = new Size(251, 23);
@@ -246,6 +248,7 @@
             // 
             // txtName
             // 
+            txtName.Enabled = false;
             txtName.Location = new Point(154, 51);
             txtName.Name = "txtName";
             txtName.Size = new Size(251, 23);
@@ -253,6 +256,7 @@
             // 
             // txtEmail
             // 
+            txtEmail.Enabled = false;
             txtEmail.Location = new Point(154, 80);
             txtEmail.Name = "txtEmail";
             txtEmail.Size = new Size(251, 23);
@@ -260,6 +264,7 @@
             // 
             // txtDescription
             // 
+            txtDescription.Enabled = false;
             txtDescription.Location = new Point(154, 109);
             txtDescription.Multiline = true;
             txtDescription.Name = "txtDescription";
@@ -268,16 +273,30 @@
             // 
             // txtPhoneNumber
             // 
+            txtPhoneNumber.Enabled = false;
             txtPhoneNumber.Location = new Point(154, 245);
             txtPhoneNumber.Name = "txtPhoneNumber";
             txtPhoneNumber.Size = new Size(251, 23);
             txtPhoneNumber.TabIndex = 5;
+            // 
+            // button2
+            // 
+            button2.BackColor = SystemColors.HotTrack;
+            button2.ForeColor = SystemColors.Control;
+            button2.Location = new Point(685, 12);
+            button2.Name = "button2";
+            button2.Size = new Size(96, 48);
+            button2.TabIndex = 5;
+            button2.Text = "Return to main Menu";
+            button2.UseVisualStyleBackColor = false;
+            button2.Click += button2_Click;
             // 
             // PublisherList
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(button2);
             Controls.Add(grbPublisherInfo);
             Controls.Add(grbTask);
             Controls.Add(grbSearch);
@@ -320,5 +339,6 @@
         private Label label5;
         private Label label4;
         private Label label3;
+        private Button button2;
     }
 }

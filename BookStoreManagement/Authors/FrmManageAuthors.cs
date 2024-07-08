@@ -15,10 +15,11 @@ namespace PresentationObject.Authors
     public partial class FrmManageAuthors : Form
     {
         DataAccessObject.DAO.AuthorsDAO dao = new DataAccessObject.DAO.AuthorsDAO();
-
-        public FrmManageAuthors()
+        private Form _menuScreen;
+        public FrmManageAuthors(Form menuScreen)
         {
             InitializeComponent();
+            _menuScreen = menuScreen;
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -33,7 +34,20 @@ namespace PresentationObject.Authors
 
         public void loadAuthors()
         {
-            dgAuthors.DataSource = dao.getListAuthors();
+            try
+            {
+                var authors = dao.getListAuthors();
+                if (authors != null)
+                {
+                    dgAuthors.DataSource = null; // Reset the data source
+                    dgAuthors.DataSource = authors;
+                    dgAuthors.Refresh(); // Refresh the DataGridView
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading authors: {ex.Message}");
+            }
         }
 
         private void btnAddAuthor_Click(object sender, EventArgs e)
@@ -100,6 +114,12 @@ namespace PresentationObject.Authors
                 MessageBox.Show(ex.Message);
             }
 
+        }
+
+        private void btnMainScreen_Click(object sender, EventArgs e)
+        {
+            _menuScreen.Show();
+            this.Close();
         }
     }
 }

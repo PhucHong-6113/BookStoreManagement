@@ -6,13 +6,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessObject.Repository
+namespace DataAccessObject.Repository
 {
-    public class UserRepository : BaseRepository<User>
+    public class UserRepository
     {
         protected readonly BookStoreManagementDbContext _context;
-        public UserRepository() : base() {
+        public UserRepository() {
             _context = new BookStoreManagementDbContext();
+        }
+
+        public List<User> GetAll()
+        {
+           return _context.Users.ToList();
         }
         public User GetUserById(int userId)
         {

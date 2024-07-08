@@ -16,7 +16,6 @@ namespace PresentationObject.Publishers
 
         private void Clear()
         {
-            txtID.Text = "";
             txtName.Text = "";
             txtEmail.Text = "";
             txtDescription.Text = "";
@@ -29,21 +28,14 @@ namespace PresentationObject.Publishers
             {
                 Publisher publisher = new()
                 {
-                    //PublisherId = int.Parse(txtID.Text.Trim()),
                     PublisherName = txtName.Text.Trim(),
                     PublisherEmail = txtEmail.Text.Trim(),
                     PublisherDescription = txtEmail.Text.Trim(),
                     PublisherPhoneNo = txtPhoneNumber.Text.Trim(),
                 };
-                //if (repo.PublisherExists(publisher.PublisherId) == false)
-                //{
+
                     repo.AddPublisher(publisher);
                     Close();
-                //}
-                //else
-                //{
-                //    MessageBox.Show("The ID is already existed!!", "Invalid ID", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //}
             }
             catch
             {
