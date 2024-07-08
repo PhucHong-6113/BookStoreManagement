@@ -30,12 +30,12 @@
         {
             SuspendLayout();
             // 
-            // MainStoreScreen
+            // MainScreen
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1244, 598);
-            Name = "MainStoreScreen";
+            ClientSize = new Size(591, 255);
+            Name = "MainScreen";
             Text = "MainStoreScreen";
             ResumeLayout(false);
         }
