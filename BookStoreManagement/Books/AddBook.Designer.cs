@@ -197,6 +197,7 @@
             menu_link.TabIndex = 41;
             menu_link.TabStop = true;
             menu_link.Text = "cancel";
+            menu_link.LinkClicked += menu_link_LinkClicked;
             // 
             // submit
             // 
