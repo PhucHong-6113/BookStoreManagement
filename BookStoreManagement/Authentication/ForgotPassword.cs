@@ -43,7 +43,7 @@ namespace PresentationObject
                     {
                         userRepository.UpdateUserPassword(int.Parse(userId), newPassword);
                         MessageBox.Show("Password updated successfully. Please login with your new password.");
-                        this.Close(); 
+                        this.Close();
                     }
                     else
                     {

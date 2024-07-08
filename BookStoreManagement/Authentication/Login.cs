@@ -27,22 +27,19 @@ namespace BookStoreManagement
             if (resultLogin != null)
             {
                 var form2 = new Library();
-                var form3 = new StaffList();
+                var form3 = new MenuScreen();
                 if (resultLogin.Role == "Admin" && resultLogin.Status == "Active")
                 {
                     form2.ShowDialog();
-                    
                 }
                 else if (resultLogin.Role == "Staff" && resultLogin.Status == "Active")
                 {
                     form3.ShowDialog();
-                    
                 }
                 else
                 {
                     MessageBox.Show("Your account is disabled");
                 }
-                
             }
             else
             {
