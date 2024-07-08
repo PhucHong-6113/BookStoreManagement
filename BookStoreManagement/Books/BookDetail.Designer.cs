@@ -56,6 +56,10 @@
             publisher_cbb = new ComboBox();
             category_cbb = new ComboBox();
             author_cbb = new ComboBox();
+            id_lbl = new Label();
+            publisherId_lbl = new Label();
+            authorId_lbl = new Label();
+            categoryId_lbl = new Label();
             update_book_detail = new Button();
             SuspendLayout();
             // 
@@ -322,39 +326,96 @@
             // 
             // publisher_cbb
             // 
+            publisher_cbb.DisplayMember = "Text";
             publisher_cbb.Font = new Font("Microsoft Sans Serif", 15.75F);
             publisher_cbb.FormattingEnabled = true;
             publisher_cbb.Location = new Point(1068, 185);
             publisher_cbb.Name = "publisher_cbb";
             publisher_cbb.Size = new Size(160, 33);
             publisher_cbb.TabIndex = 37;
+            publisher_cbb.ValueMember = "Value";
             publisher_cbb.Visible = false;
             // 
             // category_cbb
             // 
+            category_cbb.DisplayMember = "Text";
             category_cbb.Font = new Font("Microsoft Sans Serif", 15.75F);
             category_cbb.FormattingEnabled = true;
             category_cbb.Location = new Point(1068, 412);
             category_cbb.Name = "category_cbb";
             category_cbb.Size = new Size(160, 33);
             category_cbb.TabIndex = 38;
+            category_cbb.ValueMember = "Value";
             category_cbb.Visible = false;
             // 
             // author_cbb
             // 
+            author_cbb.DisplayMember = "Text";
             author_cbb.Font = new Font("Microsoft Sans Serif", 15.75F);
             author_cbb.FormattingEnabled = true;
             author_cbb.Location = new Point(1068, 294);
             author_cbb.Name = "author_cbb";
             author_cbb.Size = new Size(160, 33);
             author_cbb.TabIndex = 39;
+            author_cbb.ValueMember = "Value";
             author_cbb.Visible = false;
+            // 
+            // id_lbl
+            // 
+            id_lbl.AutoSize = true;
+            id_lbl.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            id_lbl.ForeColor = Color.Red;
+            id_lbl.Location = new Point(352, 74);
+            id_lbl.Name = "id_lbl";
+            id_lbl.Size = new Size(61, 37);
+            id_lbl.TabIndex = 41;
+            id_lbl.Text = "null";
+            // 
+            // publisherId_lbl
+            // 
+            publisherId_lbl.AutoSize = true;
+            publisherId_lbl.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            publisherId_lbl.ForeColor = Color.Red;
+            publisherId_lbl.Location = new Point(352, 183);
+            publisherId_lbl.Name = "publisherId_lbl";
+            publisherId_lbl.Size = new Size(61, 37);
+            publisherId_lbl.TabIndex = 43;
+            publisherId_lbl.Text = "null";
+            publisherId_lbl.Visible = false;
+            // 
+            // authorId_lbl
+            // 
+            authorId_lbl.AutoSize = true;
+            authorId_lbl.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            authorId_lbl.ForeColor = Color.Red;
+            authorId_lbl.Location = new Point(352, 292);
+            authorId_lbl.Name = "authorId_lbl";
+            authorId_lbl.Size = new Size(61, 37);
+            authorId_lbl.TabIndex = 45;
+            authorId_lbl.Text = "null";
+            authorId_lbl.Visible = false;
+            // 
+            // categoryId_lbl
+            // 
+            categoryId_lbl.AutoSize = true;
+            categoryId_lbl.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            categoryId_lbl.ForeColor = Color.Red;
+            categoryId_lbl.Location = new Point(352, 399);
+            categoryId_lbl.Name = "categoryId_lbl";
+            categoryId_lbl.Size = new Size(61, 37);
+            categoryId_lbl.TabIndex = 47;
+            categoryId_lbl.Text = "null";
+            categoryId_lbl.Visible = false;
             // 
             // BookDetail
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1240, 616);
+            Controls.Add(categoryId_lbl);
+            Controls.Add(authorId_lbl);
+            Controls.Add(publisherId_lbl);
+            Controls.Add(id_lbl);
             Controls.Add(author_cbb);
             Controls.Add(category_cbb);
             Controls.Add(publisher_cbb);
@@ -420,5 +481,9 @@
         private ComboBox publisher_cbb;
         private ComboBox category_cbb;
         private ComboBox author_cbb;
+        private Label id_lbl;
+        private Label publisherId_lbl;
+        private Label authorId_lbl;
+        private Label categoryId_lbl;
     }
 }

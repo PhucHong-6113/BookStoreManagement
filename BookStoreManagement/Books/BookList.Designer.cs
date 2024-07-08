@@ -125,6 +125,7 @@
             update_book.TabIndex = 5;
             update_book.Text = "Update Book";
             update_book.UseVisualStyleBackColor = false;
+            update_book.Click += update_book_Click;
             // 
             // search_txt
             // 

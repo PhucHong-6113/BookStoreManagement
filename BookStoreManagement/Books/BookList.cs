@@ -67,22 +67,44 @@ namespace PresentationObject.Books
         {
             if (dgv_books.SelectedRows.Count > 0)
             {
+
                 int selectedBookId = Convert.ToInt32(dgv_books.CurrentRow.Cells["BookId"].Value);
                 BookDetail bookDetail = new BookDetail(selectedBookId, this);
                 bookDetail.Show();
                 this.Hide();
+                bookDetail.Closed += delegate
+                {
+                    _bookRepository = new();
+                    refreshData();
+                };
             }
         }
 
         private void add_book_Click(object sender, EventArgs e)
         {
-            AddBook addBook = new AddBook();
+            AddBook addBook = new AddBook(this);
             addBook.Show();
             addBook.Closed += delegate
             {
                 _bookRepository = new();
                 refreshData();
             };
+        }
+
+        private void update_book_Click(object sender, EventArgs e)
+        {
+            if (dgv_books.SelectedRows.Count > 0)
+            {
+                int selectedBookId = Convert.ToInt32(dgv_books.CurrentRow.Cells["BookId"].Value);
+                UpdateBook updateBook = new UpdateBook(selectedBookId,this);
+                updateBook.Show();
+                updateBook.Closed += delegate
+                {
+                    _bookRepository = new();
+                    refreshData();
+                };
+            }
+
         }
 
         private void search_btn_Click(object sender, EventArgs e)
@@ -153,5 +175,7 @@ namespace PresentationObject.Books
             public int? Quantity { get; set; }
             public decimal? Price { get; set; }
         }
+
+        
     }
 }
