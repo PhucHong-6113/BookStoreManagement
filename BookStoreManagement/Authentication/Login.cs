@@ -1,4 +1,4 @@
-using BusinessObject.Repository;
+using DataAccessObject.Repository;
 using PresentationObject;
 using PresentationObject.Admin;
 using PresentationObject.Publishers;
@@ -7,34 +7,31 @@ namespace BookStoreManagement
 {
     public partial class Login : Form
     {
-        protected readonly UserRepository userRepository;
+        protected readonly UserRepository _userRepository;
         public Login()
         {
-            userRepository = new UserRepository();
+            _userRepository = new UserRepository();
             InitializeComponent();
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             var userId = textBox1.Text;
             var password = textBox2.Text;
-            var resultLogin = userRepository.GetAll().FirstOrDefault(x => x.UserId == int.Parse(userId) && x.Password == password);
+            var resultLogin = _userRepository.GetAll().FirstOrDefault(x => x.UserId == int.Parse(userId) && x.Password == password);
             if (resultLogin != null)
             {
                 var form2 = new Library();
-                var form3 = new MenuScreen();
+                var form3 = new MenuScreen(resultLogin.FullName, this);
                 if (resultLogin.Role == "Admin" && resultLogin.Status == "Active")
                 {
-                    form2.ShowDialog();
+                    form2.Show();
+                    this.Hide();
                 }
                 else if (resultLogin.Role == "Staff" && resultLogin.Status == "Active")
                 {
-                    form3.ShowDialog();
+                    form3.Show();
+                    this.Hide();
                 }
                 else
                 {
@@ -46,11 +43,6 @@ namespace BookStoreManagement
                 MessageBox.Show("Incorrect UserId or Password");
             }
 
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            
         }
 
         private void label3_Click(object sender, EventArgs e)

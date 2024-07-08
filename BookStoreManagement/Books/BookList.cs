@@ -15,11 +15,12 @@ namespace PresentationObject.Books
     public partial class BookList : Form
     {
         BookRepository _bookRepository;
-
-        public BookList()
+        private Form _menuScreen;
+        public BookList(Form previousForm)
         {
             _bookRepository = new BookRepository();
             InitializeComponent();
+            _menuScreen = previousForm;
             try
             {
                 refreshData();
@@ -96,7 +97,7 @@ namespace PresentationObject.Books
             if (dgv_books.SelectedRows.Count > 0)
             {
                 int selectedBookId = Convert.ToInt32(dgv_books.CurrentRow.Cells["BookId"].Value);
-                UpdateBook updateBook = new UpdateBook(selectedBookId,this);
+                UpdateBook updateBook = new UpdateBook(selectedBookId, this);
                 updateBook.Show();
                 updateBook.Closed += delegate
                 {
@@ -114,9 +115,8 @@ namespace PresentationObject.Books
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //MenuScreen _menuScreen = new MenuScreen();
-            //_menuScreen.Show();
-            //this.Close();
+            _menuScreen.Show();
+            this.Close();
         }
 
         private void enter(object sender, KeyEventArgs e)             //No can't do :((
@@ -141,11 +141,6 @@ namespace PresentationObject.Books
                 bookDetail.Show();
                 this.Hide();
             }
-        }
-
-        private void refresh_dgv(object sender, FormClosedEventArgs e)             //no can't do :((
-        {
-            refreshData();
         }
 
         private void delete_book_Click(object sender, EventArgs e)
@@ -175,7 +170,5 @@ namespace PresentationObject.Books
             public int? Quantity { get; set; }
             public decimal? Price { get; set; }
         }
-
-        
     }
 }

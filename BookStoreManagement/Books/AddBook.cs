@@ -1,5 +1,6 @@
 ﻿using BusinessObject.Models;
 using DataAccessObject;
+using DataAccessObject.DAO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,27 +16,27 @@ namespace PresentationObject.Books
     public partial class AddBook : Form
     {
         BookRepository _bookRepository;
+        CategoryRepository _categoryRepository;
+        AuthorsDAO _authorRepository;
+        PublisherRepository _publisherRepository;
         Form _bookList;
         public AddBook(Form previousForm)
         {
             _bookRepository = new BookRepository();
+            _categoryRepository = new CategoryRepository();
+            _publisherRepository = new PublisherRepository();
+            _authorRepository = new AuthorsDAO();
             InitializeComponent();
 
-            publisher_cbb.DataSource = _bookRepository.GetBooks().Select(b => new { Text = b.Publisher.PublisherName, Value = b.PublisherId })
-                .Distinct()
-                .ToList();
+            publisher_cbb.DataSource = _publisherRepository.GetAllPublishers().Select(p => new { Text = p.PublisherName, Value = p.PublisherId }).ToList();
             publisher_cbb.DisplayMember = "Text";
             publisher_cbb.ValueMember = "Value";
 
-            category_cbb.DataSource = _bookRepository.GetBooks().Select(b => new { Text = b.Category.CategoryName, Value = b.CategoryId })
-                .Distinct()
-                .ToList();
+            category_cbb.DataSource = _categoryRepository.GetCategories().Select(c => new { Text = c.CategoryName, Value = c.CategoryId }).ToList();
             category_cbb.DisplayMember = "Text";
             category_cbb.ValueMember = "Value";
 
-            author_cbb.DataSource = _bookRepository.GetBooks().Select(b => new { Text = b.Author.AuthorName, Value = b.AuthorId })
-                .Distinct()
-                .ToList();
+            author_cbb.DataSource = _authorRepository.getListAuthors().Select(a => new { Text = a.AuthorName, Value = a.AuthorId }).ToList();
             author_cbb.DisplayMember = "Text";
             author_cbb.ValueMember = "Value";
 

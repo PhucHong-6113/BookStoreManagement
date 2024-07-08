@@ -15,11 +15,13 @@ namespace PresentationObject.Publishers
 {
     public partial class PublisherList : Form
     {
+        private Form _menuScreen;
         private PublisherRepository repository = new PublisherRepository();
 
-        public PublisherList()
+        public PublisherList(Form previousForm)
         {
             InitializeComponent();
+            _menuScreen = previousForm;
         }
         private void ClearInfo()
         {
@@ -114,6 +116,12 @@ namespace PresentationObject.Publishers
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             RefreshData();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            _menuScreen.Show();
+            this.Close();
         }
     }
 }

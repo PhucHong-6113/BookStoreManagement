@@ -15,27 +15,29 @@ namespace PresentationObject.Categories
 {
     public partial class CategoryList : Form
     {
+        private Form _menuScreen;
         CategoryRepository _categoryRepository;
-        public CategoryList()
+        public CategoryList(Form menuScreen)
         {
             _categoryRepository = new CategoryRepository();
             InitializeComponent();
             dgvCategory.ReadOnly = true;
             this.Load += CategoryList_Load;
+            _menuScreen = menuScreen;
         }
         private void RefreshData()
         {
             var searchTerm = tbSearchCategory.Text;
-            dgvCategory.DataSource=null;
-            dgvCategory.DataSource =  _categoryRepository.GetCategories(b => b.CategoryName.Contains(searchTerm))
-                .Select(b => new 
+            dgvCategory.DataSource = null;
+            dgvCategory.DataSource = _categoryRepository.GetCategories(b => b.CategoryName.Contains(searchTerm))
+                .Select(b => new
                 {
                     CategoryId = b.CategoryId,
                     CategoryName = b.CategoryName,
                     CategoryDescription = b.CategoryDescription,
                 }).ToList();
 
-         
+
         }
 
         private void CategoryList_Load(object sender, EventArgs e)
@@ -43,7 +45,7 @@ namespace PresentationObject.Categories
             RefreshData();
         }
 
-        
+
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
@@ -100,6 +102,12 @@ namespace PresentationObject.Categories
                     RefreshData();
                 };
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            _menuScreen.Show();
+            this.Close();
         }
     }
 }

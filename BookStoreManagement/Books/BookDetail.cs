@@ -1,5 +1,6 @@
 ﻿using BusinessObject.Models;
 using DataAccessObject;
+using DataAccessObject.DAO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,10 +16,16 @@ namespace PresentationObject
     public partial class BookDetail : Form
     {
         BookRepository _bookRepository;
+        CategoryRepository _categoryRepository;
+        AuthorsDAO _authorRepository;
+        PublisherRepository _publisherRepository;
         private Form _bookList;
         public BookDetail(int id, Form previousForm)
         {
             _bookRepository = new BookRepository();
+            _categoryRepository = new CategoryRepository();
+            _publisherRepository = new PublisherRepository();   
+            _authorRepository = new AuthorsDAO();
             InitializeComponent();
             _bookList = previousForm;
             refreshData(id);
@@ -47,7 +54,7 @@ namespace PresentationObject
         {
             update_alert.Visible = false;
             _bookRepository = new BookRepository();
-            publisher_cbb.DataSource = _bookRepository.GetBooks().Select(b => new { Text = b.Publisher.PublisherName, Value = b.PublisherId }).Distinct().ToList();
+            publisher_cbb.DataSource = _publisherRepository.GetAllPublishers().Select(p => new { Text = p.PublisherName, Value = p.PublisherId }).ToList();
             publisher_cbb.Visible = true;
         }
 
@@ -55,7 +62,7 @@ namespace PresentationObject
         {
             update_alert.Visible = false;
             _bookRepository = new BookRepository();
-            author_cbb.DataSource = _bookRepository.GetBooks().Select(b => new { Text = b.Author.AuthorName, Value = b.AuthorId }).Distinct().ToList();
+            author_cbb.DataSource = _authorRepository.getListAuthors().Select(a => new { Text = a.AuthorName, Value = a.AuthorId }).ToList();
             author_cbb.Visible = true;
         }
 
@@ -63,7 +70,7 @@ namespace PresentationObject
         {
             update_alert.Visible = false;
             _bookRepository = new BookRepository();
-            category_cbb.DataSource = _bookRepository.GetBooks().Select(b => new { Text = b.Category.CategoryName, Value = b.CategoryId }).Distinct().ToList();
+            category_cbb.DataSource = _categoryRepository.GetCategories().Select(c => new { Text = c.CategoryName, Value = c.CategoryId }).ToList();
             category_cbb.Visible = true;
         }
 
