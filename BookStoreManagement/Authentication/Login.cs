@@ -31,15 +31,18 @@ namespace BookStoreManagement
                 if (resultLogin.Role == "Admin" && resultLogin.Status == "Active")
                 {
                     form2.ShowDialog();
+                    
                 }
                 else if (resultLogin.Role == "Staff" && resultLogin.Status == "Active")
                 {
                     form3.ShowDialog();
+                    
                 }
                 else
                 {
                     MessageBox.Show("Your account is disabled");
                 }
+                
             }
             else
             {
@@ -49,6 +52,11 @@ namespace BookStoreManagement
         }
 
         private void button1_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void label3_Click(object sender, EventArgs e)
         {
             var form4 = new ForgotPassword();
             form4.ShowDialog();
