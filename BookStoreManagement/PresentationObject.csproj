@@ -9,8 +9,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BusinessObject\BusinessObject.csproj" />
-    <ProjectReference Include="..\DataAccessObject\DataAccessObject.csproj" />
+    <ProjectReference Include="..\BusinessObject\BusinessObject.csproj">
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\DataAccessObject\DataAccessObject.csproj">
+      <Private>True</Private>
+    </ProjectReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
