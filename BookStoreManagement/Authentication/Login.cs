@@ -21,7 +21,7 @@ namespace BookStoreManagement
             var resultLogin = _userRepository.GetAll().FirstOrDefault(x => x.UserId == int.Parse(userId) && x.Password == password);
             if (resultLogin != null)
             {
-                var form2 = new Library();
+                var form2 = new StaffList(resultLogin.FullName,this);
                 var form3 = new MenuScreen(resultLogin.FullName, this);
                 if (resultLogin.Role == "Admin" && resultLogin.Status == "Active")
                 {

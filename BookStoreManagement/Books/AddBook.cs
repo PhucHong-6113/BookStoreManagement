@@ -45,30 +45,43 @@ namespace PresentationObject.Books
 
         private void submit_Click(object sender, EventArgs e)
         {
-            if (
-                name_txt.Text == null ||
-                quantity_txt.Text == null ||
-                publisher_cbb.Text == null ||
-                category_cbb.Text == null ||
-                author_cbb.Text == null ||
-                price_txt.Text == null
-            )
+            if (string.IsNullOrEmpty(name_txt.Text) ||
+        string.IsNullOrEmpty(quantity_txt.Text) ||
+        string.IsNullOrEmpty(price_txt.Text) ||
+        publisher_cbb.SelectedValue == null ||
+        category_cbb.SelectedValue == null ||
+        author_cbb.SelectedValue == null)
             {
-                MessageBox.Show("Invalid Input!", "Notice!", MessageBoxButtons.OK);
+                MessageBox.Show("All Field must be filled!", "Notice!", MessageBoxButtons.OK);
             }
             else
             {
-                _bookRepository.AddBook(new Book
+                try
                 {
-                    BookName = name_txt.Text,
-                    Quantity = int.Parse(quantity_txt.Text),
-                    Price = decimal.Parse(price_txt.Text),
-                    PublisherId = (int)publisher_cbb.SelectedValue,
-                    CategoryId = (int)category_cbb.SelectedValue,
-                    AuthorId = (int)author_cbb.SelectedValue
-                });
-                MessageBox.Show("Successfully Add a new Book!!", "Yes sir");
-                this.Close();
+                    if (int.TryParse(quantity_txt.Text, out int quantity) &&
+                        decimal.TryParse(price_txt.Text, out decimal price))
+                    {
+                        _bookRepository.AddBook(new Book
+                        {
+                            BookName = name_txt.Text,
+                            Quantity = quantity,
+                            Price = price,
+                            PublisherId = (int)publisher_cbb.SelectedValue,
+                            CategoryId = (int)category_cbb.SelectedValue,
+                            AuthorId = (int)author_cbb.SelectedValue
+                        });
+                        MessageBox.Show("Successfully added a new book!", "Success");
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Invalid Quantity or Price!", "Error", MessageBoxButtons.OK);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("An error occurred: " + ex.Message, "Error", MessageBoxButtons.OK);
+                }
             }
 
         }

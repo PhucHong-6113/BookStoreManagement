@@ -15,7 +15,7 @@ namespace PresentationObject.Books
     public partial class UpdateBook : Form
     {
         private Form _bookList;
-        BookRepository _bookRepository;
+        protected readonly BookRepository _bookRepository;
         public UpdateBook(int id, Form previousForm)
         {
             _bookRepository = new BookRepository();
