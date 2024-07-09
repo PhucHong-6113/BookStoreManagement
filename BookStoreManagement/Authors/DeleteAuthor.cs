@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataAccessObject.DAO;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,22 +13,23 @@ namespace PresentationObject.Authors
 {
     public partial class DeleteAuthor : Form
     {
+        AuthorsDAO _authorDAO;
         public DeleteAuthor()
         {
             InitializeComponent();
+            _authorDAO = new AuthorsDAO();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
             int id = int.Parse(txtId.Text);
-            DataAccessObject.DAO.AuthorsDAO authorsDAO = new DataAccessObject.DAO.AuthorsDAO();
             try
             {
                 if (txtId.Text != null)
                 {
                     if (MessageBox.Show("Do you want to delete author " + id + " ?", "Delete", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
-                        authorsDAO.deleteAuthorById(id);
+                        _authorDAO.deleteAuthorById(int.Parse(txtId.Text));
                         MessageBox.Show("Author deleted successfully");
                     }
                 }
